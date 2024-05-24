@@ -4,10 +4,15 @@
  */
 package Controller;
 
+import com.sun.jdi.connect.spi.Connection;
+
 /**
  *
  * @author Administrator
  */
 public class Daohd {
-    
+    private Connection conn;
+}
+public void main(String[] args){
+new Daohd();
 }
