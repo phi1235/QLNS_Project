@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-
 public class CustomerView extends javax.swing.JFrame {
 
     /**
@@ -28,12 +27,13 @@ public class CustomerView extends javax.swing.JFrame {
         DefaultTableModel dt = (DefaultTableModel) tb_KhachHang.getModel();
         controller = new CustomerController(tb_KhachHang, dt);
         controller.loadData(dt);
-  for (int i = 0; i < tb_KhachHang.getColumnCount(); i++) {
+        for (int i = 0; i < tb_KhachHang.getColumnCount(); i++) {
             tb_KhachHang.setDefaultEditor(tb_KhachHang.getColumnClass(i), null);
         }
-            
+
     }
-     public String getFirstName() {
+
+    public String getFirstName() {
         return tf_hoKhachHang.getText();
     }
 
@@ -82,6 +82,7 @@ public class CustomerView extends javax.swing.JFrame {
         tb_KhachHang = new javax.swing.JTable();
         tf_diachiKhachHang = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        btn_Huy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +172,13 @@ public class CustomerView extends javax.swing.JFrame {
         jLabel8.setText("Dia chi:");
         jLabel8.setToolTipText("");
 
+        btn_Huy.setText("Huy");
+        btn_Huy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HuyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,8 +212,8 @@ public class CustomerView extends javax.swing.JFrame {
                     .addComponent(tf_emailKhachHang)
                     .addComponent(tf_diachiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(129, 129, 129)
                 .addComponent(btn_Them)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Xoa)
@@ -215,7 +223,9 @@ public class CustomerView extends javax.swing.JFrame {
                 .addComponent(btn_Dong)
                 .addGap(18, 18, 18)
                 .addComponent(btn_SapXep)
-                .addGap(148, 148, 148))
+                .addGap(18, 18, 18)
+                .addComponent(btn_Huy)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,14 +258,15 @@ public class CustomerView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_diachiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Them)
                     .addComponent(btn_Xoa)
                     .addComponent(btn_Sua)
                     .addComponent(btn_Dong)
-                    .addComponent(btn_SapXep))
-                .addGap(30, 30, 30)
+                    .addComponent(btn_SapXep)
+                    .addComponent(btn_Huy))
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -264,6 +275,7 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void btn_SapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SapXepActionPerformed
         // TODO add your handling code here:
+        controller.sortByCustomerID((DefaultTableModel) tb_KhachHang.getModel()); // Truyền dt vào phương thức sortByCustomerID()
     }//GEN-LAST:event_btn_SapXepActionPerformed
 
     private void tf_maKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_maKhachHangActionPerformed
@@ -271,27 +283,27 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_maKhachHangActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-           int maKH = Integer.parseInt(tf_maKhachHang.getText());
+        int maKH = Integer.parseInt(tf_maKhachHang.getText());
         controller.addCustomer(maKH, tf_hoKhachHang.getText(), tf_TenKhachHang.getText(), tf_sdtKhachHang.getText(), tf_emailKhachHang.getText(), tf_diachiKhachHang.getText());
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
         int maKHCu = (Integer) tb_KhachHang.getValueAt(tb_KhachHang.getSelectedRow(), 0);
-    int maKHMoi = Integer.parseInt(tf_maKhachHang.getText());
+        int maKHMoi = Integer.parseInt(tf_maKhachHang.getText());
         String hoKH = tf_hoKhachHang.getText();
         String tenKH = tf_TenKhachHang.getText();
         String sDT = tf_sdtKhachHang.getText();
         String emailKH = tf_emailKhachHang.getText();
         String diaChi = tf_diachiKhachHang.getText();
         controller.updateCustomer(maKHCu, maKHMoi, hoKH, tenKH, sDT, emailKH, diaChi);
-        
+
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         // TODO add your handling code here
-                   int maKH = Integer.parseInt(tf_maKhachHang.getText());
-                controller.deleteCustomer(maKH);
+        int maKH = Integer.parseInt(tf_maKhachHang.getText());
+        controller.deleteCustomer(maKH);
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_DongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DongActionPerformed
@@ -301,13 +313,24 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void tb_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_KhachHangMouseClicked
         // TODO add your handling code here:
-              int selectedRow = tb_KhachHang.getSelectedRow();
+        int selectedRow = tb_KhachHang.getSelectedRow();
         if (selectedRow != -1) {
             controller.displaySelectedBook((DefaultTableModel) tb_KhachHang.getModel(), selectedRow, tf_maKhachHang, tf_hoKhachHang, tf_TenKhachHang, tf_sdtKhachHang, tf_emailKhachHang, tf_diachiKhachHang);
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn để sửa.");
         }
     }//GEN-LAST:event_tb_KhachHangMouseClicked
+
+    private void btn_HuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuyActionPerformed
+        // TODO add your handling code here:
+        tf_maKhachHang.setText(" ");
+        tf_hoKhachHang.setText(" ");
+        tf_TenKhachHang.setText(" ");
+        tf_sdtKhachHang.setText(" ");
+        tf_emailKhachHang.setText(" ");
+        tf_diachiKhachHang.setText(" ");
+
+    }//GEN-LAST:event_btn_HuyActionPerformed
     public void displayCustomers(List<Customer> customers) {
         DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
         model.setRowCount(0); // Xóa tất cả các dòng trong bảng
@@ -360,6 +383,7 @@ public class CustomerView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Dong;
+    private javax.swing.JButton btn_Huy;
     private javax.swing.JButton btn_SapXep;
     private javax.swing.JButton btn_Sua;
     private javax.swing.JButton btn_Them;

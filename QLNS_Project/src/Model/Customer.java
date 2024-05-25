@@ -28,6 +28,10 @@ public class Customer {
         }
     }
 
+    public Customer(int maKH, String hoKH, String tenKH, String sDT, String email, String diaChi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public ResultSet getAllCustomers() throws SQLException {
         String sql = "SELECT * FROM Customer";
         PreparedStatement se = con.prepareStatement(sql);
@@ -100,6 +104,11 @@ public class Customer {
             JOptionPane.showMessageDialog(null, "Lỗi khi xóa khách hàng: " + e.getMessage());
             return false;
         }
+    }
+    public ResultSet sortCustomersByCustomerID() throws SQLException {
+        String sql = "SELECT * FROM Customer ORDER BY CustomerID";
+        PreparedStatement statement = con.prepareStatement(sql);
+        return statement.executeQuery();
     }
 
     public Object getCustomerID() {
