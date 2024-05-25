@@ -6,8 +6,13 @@ package Controller;
 
 import Model.BookModel;
 import View.frm_Menu;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -115,13 +120,13 @@ public class BookController {
             new frm_Menu().setVisible(true); // Hiển thị form Menu
         }
     }
-    
+
     // Tìm kiếm sách
     public void searchBooks(String keyword, DefaultTableModel dt) {
         try {
             ResultSet re = model.searchBooks(keyword);
             dt.setRowCount(0); // Xóa dữ liệu cũ trong bảng trước khi nạp dữ liệu mới
-             int rowCount = 0;
+            int rowCount = 0;
             while (re.next()) {
                 String strmasp = re.getString("book_id");
                 String strtensp = re.getString("title");
@@ -135,10 +140,10 @@ public class BookController {
                 String strgia = df.format(gia);
                 String strelement[] = {strmasp, strtensp, strtenhang, strnxb, strtacgia, strgia};
                 dt.addRow(strelement);
-                 rowCount++;
+                rowCount++;
             }
             re.close();
-            
+
             if (rowCount > 0) {
                 JOptionPane.showMessageDialog(null, "Tìm kiếm thành công. Tìm thấy " + rowCount + " kết quả.");
             } else {
@@ -148,7 +153,6 @@ public class BookController {
             JOptionPane.showMessageDialog(null, "Lỗi khi tìm kiếm dữ liệu: " + e.getMessage());
         }
     }
-
 
     public void displaySelectedBook(DefaultTableModel dtm, int rowIndex, JTextField tf_maSach, JTextField tf_tenSach, JTextField tf_maNhaXuatBan, JTextField tf_nhaXuatBan, JTextField tf_tacGia, JTextField tf_gia) {
         // Lấy dữ liệu từ bảng
@@ -166,5 +170,52 @@ public class BookController {
         tf_nhaXuatBan.setText(nhaXuatBan);
         tf_tacGia.setText(tacGia);
         tf_gia.setText(gia);
+    }
+    // Thêm mã vào BookController class
+
+    public void saveBookListToFile() {
+        // Tạo một đối tượng JFileChooser
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Thiết lập tiêu đề cho hộp thoại chọn tập tin
+        fileChooser.setDialogTitle("Chọn nơi lưu danh sách sách");
+
+        // Hiển thị hộp thoại chọn tập tin và lấy kết quả
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        // Nếu người dùng chọn OK trong hộp thoại
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Lấy đường dẫn tập tin đã chọn
+            File fileToSave = fileChooser.getSelectedFile();
+
+            try {
+                // Tạo một đối tượng BufferedWriter để ghi vào tập tin
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave));
+
+                // Lấy số lượng hàng trong bảng
+                int rowCount = jtb_Qlsach.getRowCount();
+
+                // Duyệt qua từng hàng trong bảng và ghi thông tin vào tập tin
+                for (int i = 0; i < rowCount; i++) {
+                    StringBuilder line = new StringBuilder();
+                    for (int j = 0; j < jtb_Qlsach.getColumnCount(); j++) {
+                        line.append(jtb_Qlsach.getValueAt(i, j));
+                        if (j < jtb_Qlsach.getColumnCount() - 1) {
+                            line.append(", ");
+                        }
+                    }
+                    writer.write(line.toString());
+                    writer.newLine(); // Xuống dòng sau mỗi hàng
+                }
+
+                // Đóng BufferedWriter sau khi hoàn tất
+                writer.close();
+
+                JOptionPane.showMessageDialog(null, "Danh sách sách đã được lưu vào tập tin.");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi lưu danh sách sách vào tập tin: " + e.getMessage());
+            }
+        }
+
     }
 }
