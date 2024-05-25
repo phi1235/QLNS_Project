@@ -5,8 +5,10 @@
 package Controller;
 
 import Model.BookModel;
+import View.frm_Menu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -103,16 +105,50 @@ public class BookController {
         }
     }
 
-    public void dongChuongTrinh() {
+    public void dongChuongTrinh(JFrame currentFrame) {
         int confirmed = JOptionPane.showConfirmDialog(null,
-                "Bạn có muốn đóng chương trình không?", "Đóng chương trình",
+                "Bạn có muốn đóng cửa sổ này không?", "Đóng cửa sổ",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
-            // Đóng chương trình nếu người dùng chọn "Yes"
-            System.exit(0);
+            currentFrame.setVisible(false); // Ẩn form hiện tại
+            new frm_Menu().setVisible(true); // Hiển thị form Menu
         }
     }
+    
+    // Tìm kiếm sách
+    public void searchBooks(String keyword, DefaultTableModel dt) {
+        try {
+            ResultSet re = model.searchBooks(keyword);
+            dt.setRowCount(0); // Xóa dữ liệu cũ trong bảng trước khi nạp dữ liệu mới
+             int rowCount = 0;
+            while (re.next()) {
+                String strmasp = re.getString("book_id");
+                String strtensp = re.getString("title");
+                String strtenhang = re.getString("publisher_id");
+                String strnxb = re.getString("publisher");
+                String strtacgia = re.getString("author");
+                double gia = re.getDouble("price");
+
+                // Format giá
+                java.text.DecimalFormat df = new java.text.DecimalFormat("#,###");
+                String strgia = df.format(gia);
+                String strelement[] = {strmasp, strtensp, strtenhang, strnxb, strtacgia, strgia};
+                dt.addRow(strelement);
+                 rowCount++;
+            }
+            re.close();
+            
+            if (rowCount > 0) {
+                JOptionPane.showMessageDialog(null, "Tìm kiếm thành công. Tìm thấy " + rowCount + " kết quả.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi tìm kiếm dữ liệu: " + e.getMessage());
+        }
+    }
+
 
     public void displaySelectedBook(DefaultTableModel dtm, int rowIndex, JTextField tf_maSach, JTextField tf_tenSach, JTextField tf_maNhaXuatBan, JTextField tf_nhaXuatBan, JTextField tf_tacGia, JTextField tf_gia) {
         // Lấy dữ liệu từ bảng
