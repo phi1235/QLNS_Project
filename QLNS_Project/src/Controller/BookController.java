@@ -5,8 +5,15 @@
 package Controller;
 
 import Model.BookModel;
+import View.frm_Menu;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -103,14 +110,47 @@ public class BookController {
         }
     }
 
-    public void dongChuongTrinh() {
+    public void dongChuongTrinh(JFrame currentFrame) {
         int confirmed = JOptionPane.showConfirmDialog(null,
-                "Bạn có muốn đóng chương trình không?", "Đóng chương trình",
+                "Bạn có muốn đóng cửa sổ này không?", "Đóng cửa sổ",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
-            // Đóng chương trình nếu người dùng chọn "Yes"
-            System.exit(0);
+            currentFrame.setVisible(false); // Ẩn form hiện tại
+            new frm_Menu().setVisible(true); // Hiển thị form Menu
+        }
+    }
+
+    // Tìm kiếm sách
+    public void searchBooks(String keyword, DefaultTableModel dt) {
+        try {
+            ResultSet re = model.searchBooks(keyword);
+            dt.setRowCount(0); // Xóa dữ liệu cũ trong bảng trước khi nạp dữ liệu mới
+            int rowCount = 0;
+            while (re.next()) {
+                String strmasp = re.getString("book_id");
+                String strtensp = re.getString("title");
+                String strtenhang = re.getString("publisher_id");
+                String strnxb = re.getString("publisher");
+                String strtacgia = re.getString("author");
+                double gia = re.getDouble("price");
+
+                // Format giá
+                java.text.DecimalFormat df = new java.text.DecimalFormat("#,###");
+                String strgia = df.format(gia);
+                String strelement[] = {strmasp, strtensp, strtenhang, strnxb, strtacgia, strgia};
+                dt.addRow(strelement);
+                rowCount++;
+            }
+            re.close();
+
+            if (rowCount > 0) {
+                JOptionPane.showMessageDialog(null, "Tìm kiếm thành công. Tìm thấy " + rowCount + " kết quả.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi tìm kiếm dữ liệu: " + e.getMessage());
         }
     }
 
@@ -130,5 +170,52 @@ public class BookController {
         tf_nhaXuatBan.setText(nhaXuatBan);
         tf_tacGia.setText(tacGia);
         tf_gia.setText(gia);
+    }
+    // Thêm mã vào BookController class
+
+    public void saveBookListToFile() {
+        // Tạo một đối tượng JFileChooser
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Thiết lập tiêu đề cho hộp thoại chọn tập tin
+        fileChooser.setDialogTitle("Chọn nơi lưu danh sách sách");
+
+        // Hiển thị hộp thoại chọn tập tin và lấy kết quả
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        // Nếu người dùng chọn OK trong hộp thoại
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Lấy đường dẫn tập tin đã chọn
+            File fileToSave = fileChooser.getSelectedFile();
+
+            try {
+                // Tạo một đối tượng BufferedWriter để ghi vào tập tin
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave));
+
+                // Lấy số lượng hàng trong bảng
+                int rowCount = jtb_Qlsach.getRowCount();
+
+                // Duyệt qua từng hàng trong bảng và ghi thông tin vào tập tin
+                for (int i = 0; i < rowCount; i++) {
+                    StringBuilder line = new StringBuilder();
+                    for (int j = 0; j < jtb_Qlsach.getColumnCount(); j++) {
+                        line.append(jtb_Qlsach.getValueAt(i, j));
+                        if (j < jtb_Qlsach.getColumnCount() - 1) {
+                            line.append(", ");
+                        }
+                    }
+                    writer.write(line.toString());
+                    writer.newLine(); // Xuống dòng sau mỗi hàng
+                }
+
+                // Đóng BufferedWriter sau khi hoàn tất
+                writer.close();
+
+                JOptionPane.showMessageDialog(null, "Danh sách sách đã được lưu vào tập tin.");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Đã xảy ra lỗi khi lưu danh sách sách vào tập tin: " + e.getMessage());
+            }
+        }
+
     }
 }
