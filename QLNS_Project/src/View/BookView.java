@@ -5,7 +5,6 @@
 package View;
 import java.sql.SQLException;
 import Controller.BookController;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,9 +24,6 @@ public class BookView extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jtb_Qlsach.getModel();
         controller = new BookController(jtb_Qlsach, dtm);
         controller.loadData(dtm);
-         setLocationRelativeTo(null);
-         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); 
-         
     }
 
     /**
@@ -59,15 +55,11 @@ public class BookView extends javax.swing.JFrame {
         tf_maNhaxuatban = new javax.swing.JTextField();
         tf_nhaXuatBan = new javax.swing.JTextField();
         tf_tacGia = new javax.swing.JTextField();
-        tf_search = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
-        btn_showAll = new javax.swing.JButton();
-        btn_luu = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(jTree1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Ma sach:");
 
@@ -127,33 +119,9 @@ public class BookView extends javax.swing.JFrame {
             }
         });
 
-        tf_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_searchActionPerformed(evt);
-            }
-        });
-
-        btn_search.setText("Search");
-        btn_search.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
-
-        btn_showAll.setText("ShowAll");
-        btn_showAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_showAllActionPerformed(evt);
-            }
-        });
-
-        btn_luu.setText("Luu");
-        btn_luu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_luuActionPerformed(evt);
-            }
-        });
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel7.setText("QLNS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,57 +136,44 @@ public class BookView extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_maSach, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(tf_gia, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(tf_tenSach, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_maSach, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_gia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_tenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(jbtn_Them)
-                        .addGap(34, 34, 34)
-                        .addComponent(jbtn_Sua)
-                        .addGap(33, 33, 33)
-                        .addComponent(jbtn_Xoa)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtn_Dong))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))))
+                        .addGap(61, 61, 61)
+                        .addComponent(jbtn_Sua)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtn_Xoa)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(btn_showAll))
+                        .addGap(47, 47, 47)
+                        .addComponent(jbtn_Dong))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_luu)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tf_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_maNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_tacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_maNhaxuatban, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_tacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(54, 54, 54))
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(209, 209, 209)
-                .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_search)
+                .addGap(296, 296, 296)
+                .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_search)
-                    .addComponent(btn_luu))
-                .addGap(26, 26, 26)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel6)
@@ -242,8 +197,7 @@ public class BookView extends javax.swing.JFrame {
                     .addComponent(jbtn_Them)
                     .addComponent(jbtn_Sua)
                     .addComponent(jbtn_Xoa)
-                    .addComponent(jbtn_Dong)
-                    .addComponent(btn_showAll))
+                    .addComponent(jbtn_Dong))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -272,7 +226,7 @@ public class BookView extends javax.swing.JFrame {
 
     private void jbtn_DongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_DongActionPerformed
 
-        controller.dongChuongTrinh(this);
+        controller.dongChuongTrinh();
 
     }//GEN-LAST:event_jbtn_DongActionPerformed
 
@@ -291,29 +245,6 @@ public class BookView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jtb_QlsachMouseClicked
-
-    private void tf_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_searchActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_tf_searchActionPerformed
-
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        // TODO add your handling code here:
-         String keyword = tf_search.getText();
-        DefaultTableModel dtm = (DefaultTableModel) jtb_Qlsach.getModel();
-        controller.searchBooks(keyword, dtm);
-    }//GEN-LAST:event_btn_searchActionPerformed
-
-    private void btn_showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showAllActionPerformed
-        // TODO add your handling code here:
-           DefaultTableModel dtm = (DefaultTableModel) jtb_Qlsach.getModel();
-        controller.loadData(dtm);
-    }//GEN-LAST:event_btn_showAllActionPerformed
-
-    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-        // TODO add your handling code here:
-         controller.saveBookListToFile();
-    }//GEN-LAST:event_btn_luuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,24 +274,22 @@ public class BookView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                BookView bookView = new BookView(); // Khởi tạo một thể hiện của BookView (phần view)
-//                bookView.setVisible(true); // Hiển thị cửa sổ giao diện người dùng
-//            }
-//        });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                BookView bookView = new BookView(); // Khởi tạo một thể hiện của BookView (phần view)
+                bookView.setVisible(true); // Hiển thị cửa sổ giao diện người dùng
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_luu;
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_showAll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree1;
@@ -373,7 +302,6 @@ public class BookView extends javax.swing.JFrame {
     private javax.swing.JTextField tf_maNhaxuatban;
     private javax.swing.JTextField tf_maSach;
     private javax.swing.JTextField tf_nhaXuatBan;
-    private javax.swing.JTextField tf_search;
     private javax.swing.JTextField tf_tacGia;
     private javax.swing.JTextField tf_tenSach;
     // End of variables declaration//GEN-END:variables
