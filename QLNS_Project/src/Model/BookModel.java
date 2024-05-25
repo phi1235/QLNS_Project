@@ -47,6 +47,15 @@ public class BookModel extends javax.swing.JFrame {
         }
     }
 
+    // Phương thức để tìm kiếm sách từ cơ sở dữ liệu theo từ khóa
+    public ResultSet searchBooks(String keyword) throws SQLException {
+        String query = "SELECT * FROM books WHERE book_id LIKE ? OR title LIKE ?";
+      
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, "%" + keyword + "%");
+        pstmt.setString(2, "%" + keyword + "%");
+        return pstmt.executeQuery();
+    }
     // Thêm sách mới vào cơ sở dữ liệu
     public boolean addBook(String maSach, String tenSach, String maNhaXuatBan, String nhaXuatBan, String tacGia, String gia) {
         try {
