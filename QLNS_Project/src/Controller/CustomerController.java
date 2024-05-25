@@ -114,5 +114,27 @@ public class CustomerController {
         tf_emailKhachHang.setText(emailKH);
         tf_diaChiKhachHang.setText(diaChi);
     }
+  // Phương thức để sắp xếp khách hàng theo mã khách hàng
+    public void sortByCustomerID(DefaultTableModel dt) {
+        try {
+            ResultSet rs = cmodel.sortCustomersByCustomerID();
+            dt.setRowCount(0); // Xóa dữ liệu cũ trong bảng trước khi nạp dữ liệu mới
+            while (rs.next()) {
+                int strmakh = rs.getInt("CustomerID");
+                String strho = rs.getString("FirstName");
+                String strten = rs.getString("LastName");
+                String strsdt = rs.getString("PhoneNumber");
+                String stremail = rs.getString("Email");
+                String straddress = rs.getString("Address");
+
+                Object strelement[] = {strmakh, strho, strten, strsdt, stremail, straddress};
+                dt.addRow(strelement);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi sắp xếp khách hàng: " + e.getMessage());
+        }
+    }
+    
 
 }
