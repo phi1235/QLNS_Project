@@ -62,6 +62,7 @@ public class CustomerView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        genderGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,20 +84,23 @@ public class CustomerView extends javax.swing.JFrame {
         tf_diachiKhachHang = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btn_Huy = new javax.swing.JButton();
+        rb_male = new javax.swing.JRadioButton();
+        rb_female = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("QUAN LY KHACH HANG");
+        jLabel1.setText("QUẢN LÝ KHÁCH HÀNG");
 
-        jLabel2.setText("Ma khach hang:");
+        jLabel2.setText("Mã khách hàng:");
 
-        jLabel3.setText("Ho ten khach hang:");
+        jLabel3.setText("Họ tên khách hàng:");
 
         jLabel4.setText("Tên khách hàng:");
 
-        jLabel5.setText("So dien thoai:");
+        jLabel5.setText("Số điện thoại:");
 
         jLabel6.setText("Email:");
         jLabel6.setToolTipText("");
@@ -145,17 +149,17 @@ public class CustomerView extends javax.swing.JFrame {
 
         tb_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ma Khach Hang", "Ho Ten Khach Hang", "Ten Khach Hang", "So Dien Thoai", "Email", "Dia Chi"
+                "Mã khách hàng", "Họ tên khách hang", "Tên khách hàng", "Số điện thoại", "Email", "Địa chỉ", "Giới tính"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false
+                true, true, true, true, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -169,7 +173,7 @@ public class CustomerView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tb_KhachHang);
 
-        jLabel8.setText("Dia chi:");
+        jLabel8.setText("Địa chỉ");
         jLabel8.setToolTipText("");
 
         btn_Huy.setText("Huy");
@@ -178,6 +182,19 @@ public class CustomerView extends javax.swing.JFrame {
                 btn_HuyActionPerformed(evt);
             }
         });
+
+        genderGroup.add(rb_male);
+        rb_male.setText("Nam");
+        rb_male.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_maleActionPerformed(evt);
+            }
+        });
+
+        genderGroup.add(rb_female);
+        rb_female.setText("Nữ");
+
+        jLabel7.setText("Giới tinh:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,23 +206,35 @@ public class CustomerView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_TenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_hoKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_maKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rb_male, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rb_female, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_TenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_hoKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_maKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))))))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_sdtKhachHang)
@@ -213,18 +242,18 @@ public class CustomerView extends javax.swing.JFrame {
                     .addComponent(tf_diachiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+                .addGap(88, 88, 88)
                 .addComponent(btn_Them)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Xoa)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Sua)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Dong)
-                .addGap(18, 18, 18)
-                .addComponent(btn_SapXep)
-                .addGap(18, 18, 18)
                 .addComponent(btn_Huy)
+                .addGap(12, 12, 12)
+                .addComponent(btn_SapXep)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Dong)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -258,7 +287,12 @@ public class CustomerView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_diachiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rb_male)
+                    .addComponent(rb_female)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Them)
                     .addComponent(btn_Xoa)
@@ -266,8 +300,8 @@ public class CustomerView extends javax.swing.JFrame {
                     .addComponent(btn_Dong)
                     .addComponent(btn_SapXep)
                     .addComponent(btn_Huy))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -283,8 +317,9 @@ public class CustomerView extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_maKhachHangActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        int maKH = Integer.parseInt(tf_maKhachHang.getText());
-        controller.addCustomer(maKH, tf_hoKhachHang.getText(), tf_TenKhachHang.getText(), tf_sdtKhachHang.getText(), tf_emailKhachHang.getText(), tf_diachiKhachHang.getText());
+         int maKH = Integer.parseInt(tf_maKhachHang.getText());
+    String gender = rb_male.isSelected() ? "Nam" : "Nữ";
+    controller.addCustomer(maKH, tf_hoKhachHang.getText(), tf_TenKhachHang.getText(), tf_sdtKhachHang.getText(), tf_emailKhachHang.getText(), tf_diachiKhachHang.getText(), gender);
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
@@ -296,7 +331,8 @@ public class CustomerView extends javax.swing.JFrame {
         String sDT = tf_sdtKhachHang.getText();
         String emailKH = tf_emailKhachHang.getText();
         String diaChi = tf_diachiKhachHang.getText();
-        controller.updateCustomer(maKHCu, maKHMoi, hoKH, tenKH, sDT, emailKH, diaChi);
+            String gender = rb_male.isSelected() ? "Nam" : "Nữ";
+    controller.updateCustomer(maKHCu, maKHMoi, hoKH, tenKH, sDT, emailKH, diaChi, gender);
 
     }//GEN-LAST:event_btn_SuaActionPerformed
 
@@ -313,12 +349,18 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void tb_KhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_KhachHangMouseClicked
         // TODO add your handling code here:
-        int selectedRow = tb_KhachHang.getSelectedRow();
-        if (selectedRow != -1) {
-            controller.displaySelectedBook((DefaultTableModel) tb_KhachHang.getModel(), selectedRow, tf_maKhachHang, tf_hoKhachHang, tf_TenKhachHang, tf_sdtKhachHang, tf_emailKhachHang, tf_diachiKhachHang);
+  int selectedRow = tb_KhachHang.getSelectedRow();
+    if (selectedRow != -1) {
+        controller.displaySelectedBook((DefaultTableModel) tb_KhachHang.getModel(), selectedRow, tf_maKhachHang, tf_hoKhachHang, tf_TenKhachHang, tf_sdtKhachHang, tf_emailKhachHang, tf_diachiKhachHang, rb_male, rb_female);
+        String gender = (String) tb_KhachHang.getValueAt(selectedRow, 6); // Assuming gender is at column 6
+        if (gender.equals("Nam")) {
+            rb_male.setSelected(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn để sửa.");
+            rb_female.setSelected(true);
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Vui lòng chọn để sửa.");
+    }
     }//GEN-LAST:event_tb_KhachHangMouseClicked
 
     private void btn_HuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HuyActionPerformed
@@ -329,8 +371,13 @@ public class CustomerView extends javax.swing.JFrame {
         tf_sdtKhachHang.setText(" ");
         tf_emailKhachHang.setText(" ");
         tf_diachiKhachHang.setText(" ");
+        genderGroup.clearSelection(); // Clear gender selection
 
     }//GEN-LAST:event_btn_HuyActionPerformed
+
+    private void rb_maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_maleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rb_maleActionPerformed
     public void displayCustomers(List<Customer> customers) {
         DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
         model.setRowCount(0); // Xóa tất cả các dòng trong bảng
@@ -388,14 +435,18 @@ public class CustomerView extends javax.swing.JFrame {
     private javax.swing.JButton btn_Sua;
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_Xoa;
+    private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rb_female;
+    private javax.swing.JRadioButton rb_male;
     private javax.swing.JTable tb_KhachHang;
     private javax.swing.JTextField tf_TenKhachHang;
     private javax.swing.JTextField tf_diachiKhachHang;

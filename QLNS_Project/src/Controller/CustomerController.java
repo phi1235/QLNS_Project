@@ -5,18 +5,18 @@ import model.Customer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class CustomerController {
-    
 
     private final Customer cmodel;
     private final JTable tb_KhachHang;
     private final DefaultTableModel dt;
 
- public CustomerController(JTable tb_KhachHang, DefaultTableModel dt) {
+    public CustomerController(JTable tb_KhachHang, DefaultTableModel dt) {
         cmodel = new Customer();
         this.tb_KhachHang = tb_KhachHang;
         this.dt = dt;
@@ -33,8 +33,9 @@ public class CustomerController {
                 String strsdt = rs.getString("PhoneNumber");
                 String stremail = rs.getString("Email");
                 String straddress = rs.getString("Address");
+                String strgender = rs.getString("Gender");
 
-                Object strelement[] = {strmakh, strho, strten, strsdt, stremail, straddress};
+                Object strelement[] = {strmakh, strho, strten, strsdt, stremail, straddress, strgender};
                 dt.addRow(strelement);
             }
             rs.close();
@@ -43,16 +44,16 @@ public class CustomerController {
         }
     }
 
-    public void addCustomer(int maKH, String hoKH, String tenKH, String sDT, String email, String diaChi) {
+    public void addCustomer(int maKH, String hoKH, String tenKH, String sDT, String email, String diaChi, String gender) {
         if (cmodel.isCustomerExists(maKH)) {
             JOptionPane.showMessageDialog(null, "Ma khach hang da ton tai trong he thong, vui long nhap ma khach hang khac");
             return;
         }
 
-        if (cmodel.addCustomer(maKH, hoKH, tenKH, sDT, email, diaChi)) {
+        if (cmodel.addCustomer(maKH, hoKH, tenKH, sDT, email, diaChi, gender)) {
             JOptionPane.showMessageDialog(null, "Da them khach hang thanh cong");
             DefaultTableModel dt = (DefaultTableModel) tb_KhachHang.getModel();
-            Object[] strHeader = {maKH, hoKH, tenKH, sDT, email, diaChi};
+            Object[] strHeader = {maKH, hoKH, tenKH, sDT, email, diaChi, gender};
             dt.insertRow(0, strHeader);
         }
     }
@@ -71,7 +72,7 @@ public class CustomerController {
         }
     }
 
-    public void updateCustomer(int maKHCu, int maKHMoi, String hoKH, String tenKH, String sDT, String email, String diaChi) {
+    public void updateCustomer(int maKHCu, int maKHMoi, String hoKH, String tenKH, String sDT, String email, String diaChi, String gender) {
         if (!cmodel.canUpdateCustomer(maKHCu, maKHMoi)) {
             JOptionPane.showMessageDialog(null, "Khong the sua khach hang");
             DefaultTableModel dt = (DefaultTableModel) tb_KhachHang.getModel();
@@ -79,7 +80,7 @@ public class CustomerController {
             return;
         }
 
-        if (cmodel.updateCustomer(maKHMoi, hoKH, tenKH, sDT, email, diaChi)) {
+        if (cmodel.updateCustomer(maKHMoi, hoKH, tenKH, sDT, email, diaChi, gender)) {
             JOptionPane.showMessageDialog(null, "Sua thanh cong");
             // Load lại dữ liệu sau khi sửa sách thành công
             DefaultTableModel dt = (DefaultTableModel) tb_KhachHang.getModel();
@@ -98,7 +99,7 @@ public class CustomerController {
         }
     }
 
-    public void displaySelectedBook(DefaultTableModel dt, int rowIndex, JTextField tf_maKhachHang, JTextField tf_hoKhachHang, JTextField tf_tenKhachHang, JTextField tf_sdtKhachHang, JTextField tf_emailKhachHang, JTextField tf_diaChiKhachHang) {
+public void displaySelectedBook(DefaultTableModel dt, int rowIndex, JTextField tf_maKhachHang, JTextField tf_hoKhachHang, JTextField tf_tenKhachHang, JTextField tf_sdtKhachHang, JTextField tf_emailKhachHang, JTextField tf_diaChiKhachHang, JRadioButton rb_male, JRadioButton rb_female) {
         // Lấy dữ liệu từ bảng
         int maKH = Integer.parseInt(dt.getValueAt(rowIndex, 0).toString());
         String hoKH = dt.getValueAt(rowIndex, 1).toString();
@@ -106,6 +107,7 @@ public class CustomerController {
         String sdtKH = dt.getValueAt(rowIndex, 3).toString();
         String emailKH = dt.getValueAt(rowIndex, 4).toString();
         String diaChi = dt.getValueAt(rowIndex, 5).toString();
+        String gender = dt.getValueAt(rowIndex, 6).toString();
         // Hiển thị dữ liệu lên các JTextField
         tf_maKhachHang.setText(String.valueOf(maKH));
         tf_hoKhachHang.setText(hoKH);
@@ -113,8 +115,14 @@ public class CustomerController {
         tf_sdtKhachHang.setText(sdtKH);
         tf_emailKhachHang.setText(emailKH);
         tf_diaChiKhachHang.setText(diaChi);
+          if (gender.equals("Male")) {
+            rb_male.setSelected(true);
+        } else {
+            rb_female.setSelected(true);
+        }
     }
-  // Phương thức để sắp xếp khách hàng theo mã khách hàng
+    // Phương thức để sắp xếp khách hàng theo mã khách hàng
+
     public void sortByCustomerID(DefaultTableModel dt) {
         try {
             ResultSet rs = cmodel.sortCustomersByCustomerID();
@@ -126,8 +134,9 @@ public class CustomerController {
                 String strsdt = rs.getString("PhoneNumber");
                 String stremail = rs.getString("Email");
                 String straddress = rs.getString("Address");
+                String strgender = rs.getString("Gender");
 
-                Object strelement[] = {strmakh, strho, strten, strsdt, stremail, straddress};
+                Object strelement[] = {strmakh, strho, strten, strsdt, stremail, straddress, strgender};
                 dt.addRow(strelement);
             }
             rs.close();
@@ -135,6 +144,5 @@ public class CustomerController {
             JOptionPane.showMessageDialog(null, "Lỗi khi sắp xếp khách hàng: " + e.getMessage());
         }
     }
-    
 
 }

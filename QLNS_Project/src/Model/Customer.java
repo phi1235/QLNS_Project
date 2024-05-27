@@ -51,9 +51,9 @@ public class Customer {
         }
     }
 
-    public boolean addCustomer(int maKH, String hoKH, String tenKH, String sDT, String email, String diaChi) {
+    public boolean addCustomer(int maKH, String hoKH, String tenKH, String sDT, String email, String diaChi, String gender) {
         try {
-            String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, maKH);
             statement.setString(2, hoKH);
@@ -61,6 +61,7 @@ public class Customer {
             statement.setString(4, sDT);
             statement.setString(5, email);
             statement.setString(6, diaChi);
+            statement.setString(7, gender);
 
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
@@ -74,16 +75,17 @@ public class Customer {
         return oldCustomerID == newCustomerID;
     }
 
-    public boolean updateCustomer(int customerID, String firstName, String lastName, String phoneNumber, String email, String address) {
+    public boolean updateCustomer(int customerID, String firstName, String lastName, String phoneNumber, String email, String address, String gender) {
         try {
-            String sql = "UPDATE Customer SET FirstName=?, LastName=?, PhoneNumber=?, Email=?, Address=? WHERE CustomerID=?";
+            String sql = "UPDATE Customer SET FirstName=?, LastName=?, PhoneNumber=?, Email=?, Address=?, Gender=? WHERE CustomerID=?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, phoneNumber);
             statement.setString(4, email);
             statement.setString(5, address);
-            statement.setInt(6, customerID);
+            statement.setString(6, gender);
+            statement.setInt(7, customerID);
 
             int rowsUpdated = statement.executeUpdate();
             return rowsUpdated > 0;
@@ -105,6 +107,7 @@ public class Customer {
             return false;
         }
     }
+
     public ResultSet sortCustomersByCustomerID() throws SQLException {
         String sql = "SELECT * FROM Customer ORDER BY CustomerID";
         PreparedStatement statement = con.prepareStatement(sql);
