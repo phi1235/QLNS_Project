@@ -29,6 +29,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuBookActionPerformed"/>
               </Events>
             </MenuItem>
+<<<<<<< HEAD
+            <MenuItem class="javax.swing.JMenuItem" name="mnu_Customer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Customer"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnu_CustomerActionPerformed"/>
+              </Events>
+            </MenuItem>
+=======
+>>>>>>> main
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">

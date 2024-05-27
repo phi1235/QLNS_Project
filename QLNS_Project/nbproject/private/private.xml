@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/I:/QLNS_Project/QLNS_Project/src/Model/Hoadon.java</file>
-            <file>file:/I:/QLNS_Project/QLNS_Project/src/View/Login.java</file>
-            <file>file:/I:/QLNS_Project/QLNS_Project/src/Controller/Daohd.java</file>
-            <file>file:/I:/QLNS_Project/QLNS_Project/src/View/capnhatdonhang.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/View/BookView.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/Controller/CustomerController.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/Controller/BookController.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/Model/Customer.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/View/CustomerView.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/test/Controller/CustomerControllerTest.java</file>
+            <file>file:/C:/xampp/htdocs/QLNS_Project/QLNS_Project/src/Model/BookModel.java</file>
         </group>
     </open-files>
 </project-private>
