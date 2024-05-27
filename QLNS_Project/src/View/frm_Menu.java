@@ -40,7 +40,10 @@ public class frm_Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jmenuBook = new javax.swing.JMenuItem();
+<<<<<<< HEAD
         mnu_Customer = new javax.swing.JMenuItem();
+=======
+>>>>>>> main
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +68,7 @@ public class frm_Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jmenuBook);
 
+<<<<<<< HEAD
         mnu_Customer.setText("Customer");
         mnu_Customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +77,8 @@ public class frm_Menu extends javax.swing.JFrame {
         });
         jMenu3.add(mnu_Customer);
 
+=======
+>>>>>>> main
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Edit");
@@ -104,12 +110,15 @@ public class frm_Menu extends javax.swing.JFrame {
         bookView.setVisible(true);
     }//GEN-LAST:event_jmenuBookActionPerformed
 
+<<<<<<< HEAD
     private void mnu_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_CustomerActionPerformed
         // TODO add your handling code here:
         CustomerView cusView = new CustomerView();
         cusView.setVisible(true);
     }//GEN-LAST:event_mnu_CustomerActionPerformed
 
+=======
+>>>>>>> main
     /**
      * @param args the command line arguments
      */
@@ -157,6 +166,9 @@ public class frm_Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmenuBook;
+<<<<<<< HEAD
     private javax.swing.JMenuItem mnu_Customer;
+=======
+>>>>>>> main
     // End of variables declaration//GEN-END:variables
 }
